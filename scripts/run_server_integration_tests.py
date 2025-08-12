@@ -82,9 +82,9 @@ def run_example(example: str, extra_args: list[str]) -> None:
     env["RERUN_PANIC_ON_WARN"] = "1"
 
     server_env = env.copy()
-    if "RUST_LOG" not in server_env:
-        # Server can be noisy by default
-        server_env["RUST_LOG"] = "warning"
+    # if "RUST_LOG" not in server_env:
+    #     # Server can be noisy by default
+    #     server_env["RUST_LOG"] = "warning"
 
     cmd = ["cargo", "run", "--bin", "rerun-server", "--", "--dataset", "tests/assets/rrd/dataset"]
     server_process = subprocess.Popen(cmd, env=server_env)
