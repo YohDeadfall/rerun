@@ -89,31 +89,7 @@ def run_example(example: str, extra_args: list[str]) -> None:
 
     cmd = ["cargo", "run", "--bin", "rerun-server", "--", "--dataset", "tests/assets/rrd/dataset"]
     server_process = subprocess.Popen(cmd, env=server_env)
-    time.sleep(0.5)  # Wait for rerun server to start to remove a logged warning
-
-    return_code = server_process.poll()
-    if return_code is None:
-        print("Process is still running...")
-    else:
-        print(f"Process has exited with return code: {return_code}")
-
-        try:
-            stdout, stderr = server_process.communicate()
-
-            print("=== STDOUT ===")
-            if stdout:
-                print(stdout.decode("utf-8"))
-            else:
-                print("(No stdout)")
-
-            print("\n=== STDERR ===")
-            if stderr:
-                print(stderr.decode("utf-8"))
-            else:
-                print("(No stderr)")
-
-        except Exception as e:
-            print(f"Error getting output: {e}")
+    time.sleep(10.5)  # Wait for rerun server to start to remove a logged warning
 
     cmd = ["python", "-m", example] + extra_args
     python_process = subprocess.Popen(cmd, env=env)
